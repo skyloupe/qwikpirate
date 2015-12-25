@@ -77,11 +77,11 @@ The flags are parsed based on a regular expression.  Values are not verified - t
 The regex can be changed to suit your needs when you instantiate the ArgVee object.
 
 You can then retrieve the pased in values with the getFlag() methods.  There are convienience methods to
-pull out values as bools, doubles, ints, and strings.  The out put to getVelue() returns a list of values allowing
+pull out values as bools, doubles, ints, and strings.  The output to getValue() returns a list of values allowing
 a flag to be passed in multiple times with multiple values.  Or, simply use the callback/apply method described
 above.
 
-The default flag regex is two dashes followed by an alphanumberic string.  Order is not enforced or preserved.
+The default flag regex is two dashes followed by an alphanumeric string.  Order is not enforced or preserved.
 Flag evaluation is case sensitive.
 
 Example:  > app.exe --flag1 value1 --flag2 --flag3 value3
