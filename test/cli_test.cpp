@@ -32,10 +32,10 @@ protected:
     virtual ~CliTest() { }
 
     virtual void SetUp() 
-	{ 
-	    value_.clear(); 
-		counter_ = 0; 
-		errors_.clear(); 
+    { 
+        value_.clear(); 
+        counter_ = 0; 
+        errors_.clear(); 
     }
 
     virtual void TearDown() { }
