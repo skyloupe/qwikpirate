@@ -50,6 +50,11 @@ bool ArgVee::findFlag(const std::string& flag) const
 bool ArgVee::setOption(const std::string& name, bool optional, bool flag_only, 
                        optioncb_t callback, void* data)
 {
+    if(false == isFlag(name))
+    {
+        return false;
+    }
+
     Option<std::string> opt(name, optional, flag_only, callback, data);
     
     try
@@ -100,7 +105,7 @@ bool ArgVee::parse(int argc, const char* argv[], std::vector<std::string>& error
         if (true == this->isFlag(argi))
         {
             // Strip the leading dashes
-            std::string flag = argi.substr(2);
+            std::string flag = argi;//.substr(2);
             std::string value;
 
             // End case flag with no options, so give it an empty value

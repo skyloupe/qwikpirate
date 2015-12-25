@@ -69,9 +69,9 @@ TEST_F(CliTest, Options_FFF)
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, true);
-    a.setOption("two", true, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, true);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_TRUE(success);
@@ -83,9 +83,9 @@ TEST_F(CliTest, Options_F2XF)
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, true);
-    a.setOption("two", true, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, true);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_TRUE(success);
@@ -97,9 +97,9 @@ TEST_F(CliTest, Options_FVOF)
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, false);
-    a.setOption("two", true, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, false);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_TRUE(success);
@@ -119,9 +119,9 @@ TEST_F(CliTest, Options_FVXF_Callback)
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, false, Options_FVXF_Callback_cb, this);
-    a.setOption("two", true, true, Options_FVXF_Callback_cb, this);
-    a.setOption("three", true, true, Options_FVXF_Callback_cb, this);
+    a.setOption("--one", true, false, Options_FVXF_Callback_cb, this);
+    a.setOption("--two", true, true, Options_FVXF_Callback_cb, this);
+    a.setOption("--three", true, true, Options_FVXF_Callback_cb, this);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_TRUE(success);
@@ -134,7 +134,7 @@ void Options_FVXF_NULL_Callback_cb(const std::string& flag, const std::string& v
 {
     if (nullptr != param)
     {
-        if (flag == std::string("one"))
+        if (flag == std::string("--one"))
         {
             ((CliTest*)param)->value_ = value;
         }
@@ -143,19 +143,75 @@ void Options_FVXF_NULL_Callback_cb(const std::string& flag, const std::string& v
 
 TEST_F(CliTest, Options_FVXF_NULL_Callback)
 {
-    const char* argv[4] = { "theapp.exe", "--one", "one", "--three" };
+    const char* argv[4] = { "theapp.exe", "--one", "one_val", "--three" };
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, false, Options_FVXF_NULL_Callback_cb, this);
-    a.setOption("two", true, true, nullptr);
-    a.setOption("three", true, true, Options_FVXF_NULL_Callback_cb, this);
+    a.setOption("--one", true, false, Options_FVXF_NULL_Callback_cb, this);
+    a.setOption("--two", true, true, nullptr);
+    a.setOption("--three", true, true, Options_FVXF_NULL_Callback_cb, this);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_TRUE(success);
 
     a.apply();
-    ASSERT_EQ(0, value_.compare("one"));
+    ASSERT_EQ(0, value_.compare("one_val"));
+}
+
+void Options_FVXF_NULL_Callback_cb2(const std::string& flag, const std::string& value, void* param)
+{
+    if (nullptr != param)
+    {
+        if (flag == std::string("-one"))
+        {
+            ((CliTest*)param)->value_ = value;
+        }
+    }
+}
+
+TEST_F(CliTest, Options_SingleDashRegex_FVXF_NULL_Callback)
+{
+    const char* argv[4] = { "theapp.exe", "-one", "one_val", "-three" };
+    int argc = 4;
+    qwikpirate::ArgVee a("-[a-zA-Z0-9_]+$");
+
+    a.setOption("-one", true, false, Options_FVXF_NULL_Callback_cb2, this);
+    a.setOption("-two", true, true, nullptr);
+    a.setOption("-three", true, true, Options_FVXF_NULL_Callback_cb2, this);
+
+    bool success = a.parse(argc, argv, errors_);
+    ASSERT_TRUE(success);
+
+    a.apply();
+    ASSERT_EQ(0, value_.compare("one_val"));
+}
+
+////////////// Failure conditions
+
+TEST_F(CliTest, Malformed_Flag_Fails)
+{
+    //                                    *malformed
+    const char* argv[4] = { "theapp.exe", "-one", "one", "--three" };
+    int argc = 0;
+    qwikpirate::ArgVee a;
+
+    bool success = a.setOption("--one", true, false);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
+
+    success = a.parse(argc, argv, errors_);
+    ASSERT_FALSE(success);
+}
+
+TEST_F(CliTest, Malformed_Option_Fails)
+{
+    const char* argv[4] = { "theapp.exe", "--one", "one", "--three" };
+    int argc = 0;
+    qwikpirate::ArgVee a;
+
+    bool success = a.setOption("-one", true, false); //malformed
+
+    ASSERT_FALSE(success);
 }
 
 TEST_F(CliTest, Options_Zero_Argc_Fails)
@@ -164,9 +220,9 @@ TEST_F(CliTest, Options_Zero_Argc_Fails)
     int argc = 0;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, false);
-    a.setOption("two", true, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, false);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_FALSE(success);
@@ -178,9 +234,9 @@ TEST_F(CliTest, Options_Null_Argv_Fails)
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, false);
-    a.setOption("two", true, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, false);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_FALSE(success);
@@ -192,16 +248,16 @@ TEST_F(CliTest, Options_OXO_MissingFlag_Fails)
     int argc = 1;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, true);
-    a.setOption("two", false, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, true);
+    a.setOption("--two", false, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_FALSE(success);
 
     ASSERT_EQ(1, errors_.size());
 
-    ASSERT_EQ(0, errors_.front().compare("Missing flag: two"));
+    ASSERT_EQ(0, errors_.front().compare("Missing flag: --two"));
 }
 
 TEST_F(CliTest, Options_ORXO_MissingValue_Fails)
@@ -210,9 +266,9 @@ TEST_F(CliTest, Options_ORXO_MissingValue_Fails)
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, true);
-    a.setOption("two", false, false);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, true);
+    a.setOption("--two", false, false);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_FALSE(success);
@@ -228,9 +284,9 @@ TEST_F(CliTest, Options_FXOF_Fails)
     int argc = 4;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, false);
-    a.setOption("two", true, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, false);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_FALSE(success);
@@ -246,9 +302,9 @@ TEST_F(CliTest, DISABLED_Options_Short_Argv_Fails)
     int argc = 5;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, false);
-    a.setOption("two", true, true);
-    a.setOption("three", true, true);
+    a.setOption("--one", true, false);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, true);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_FALSE(success);
@@ -261,9 +317,9 @@ TEST_F(CliTest, DISABLED_Options_UnknownFlag)
     int argc = 5;
     qwikpirate::ArgVee a;
 
-    a.setOption("one", true, true);
-    a.setOption("two", true, true);
-    a.setOption("three", true, false);
+    a.setOption("--one", true, true);
+    a.setOption("--two", true, true);
+    a.setOption("--three", true, false);
 
     bool success = a.parse(argc, argv, errors_);
     ASSERT_TRUE(success);
