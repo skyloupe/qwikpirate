@@ -23,7 +23,7 @@ geoffrey_atkinso@hotmail.com (yes, this is a spam account)
 
 Ascii art by "jgs" at http://ascii.co.uk/  Nice work "jgs"!
 
-* At some point I actually *do* plan on a C API for this.
+*At some point I actually *do* plan on a C API for this.
 
 [1.0] Introduction
 ==================
@@ -55,7 +55,6 @@ At the time of this writing, the source code can be found at:
 
 https://github.com/gatkinso/qwikpirate
 
-
 [2.0] Build Requirements
 ========================
 
@@ -74,7 +73,7 @@ gcc 4.9 or greater
 [2.3] Build Requirements (OSX)
 ------------------------------
 
-LLVM capable of C++11.  Whatever the latest XCode ships (Dec 2015) with should 
+LLVM capable of C++11.  Whatever the latest XCode ships with (Dec 2015) should 
 suffice.
 
 [3.0] Build Instructions (Windows)
@@ -102,7 +101,7 @@ BUILD_SHARED_LIB:
 [4.0] Unit tests
 ================
 
-QwickPirate uses Google Mock and Google Test for its unit test framework.
+QwikPirate uses Google Mock and Google Test for the unit test framework.
 
 To build the unit tests define the CMake variable BUILD_UNIT_TESTS:
 
