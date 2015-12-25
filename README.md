@@ -1,4 +1,4 @@
-QwikPirate - "ARRRG-vee," Matey!
+QwikPirate - "ARRRG-vee, Matey!"
 ================================
                      _____
                   .-" .-. "-.
