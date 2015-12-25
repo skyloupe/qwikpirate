@@ -16,7 +16,7 @@ QwikPirate - "ARRRG-vee, Matey!"
     //
 
 
-A silly C++ library to parse command line parameters for your C and C++ programs*.
+A silly C++ library to parse command line parameters for your C and C++ programs.
 
 Copyright 2015 Geoffrey John Atkinson
 geoffrey_atkinso@hotmail.com (yes, this is a spam account)
@@ -54,6 +54,66 @@ So here it is.
 At the time of this writing, the source code can be found at:
 
 https://github.com/gatkinso/qwikpirate
+
+[1.2] How to use
+----------------
+
+The theory of operation is simple:  in your main() function, instantiate an ArgVee object.  
+
+Call setOption() to add options for your program to handle -- at this time you can also add callbacks
+for these options.  The flags can be specified as optional and flag only (no associated value).
+
+Call ArgVee::parse() to parse and verify the argc and argv parameters passed into your main function.
+
+If there are any errors, a list of them will be returned to you to present to the user (or whatever else
+you feel like doing with them).
+
+If you call the apply() function the registered callbacks for the individual options are called having 
+the flag name and it's associated value passed into the callback.
+
+The callbacks provide no thread synchronization.
+
+The flags are parsed based on a regular expression.  Values are not verified - they simply cannot contain spaces.
+The regex can be changed to suit your needs when you instantiate the ArgVee object.
+
+You can then retrieve the pased in values with the getFlag() methods.  There are convienience methods to
+pull out values as bools, doubles, ints, and strings.  The out put to getVelue() returns a list of values allowing
+a flag to be passed in multiple times with multiple values.  Or, simply use the callback/apply method described
+above.
+
+The default flag regex is two dashes followed by an alphanumberic string.  Order is not enforced or preserved.
+Flag evaluation is case sensitive.
+
+Example:  > app.exe --flag1 value1 --flag2 --flag3 value3
+
+Example (with code):   > myprogram  --matey --parrot Polly
+
+    int main(int argc, const char* argv[])
+    {
+        std::vector<std::string> errors;
+        
+        qwikpirate::ArgVee arrrg;
+        //Use: flag (match regex!!), optional?, flag only?, callback (optional - defaults to null)
+        arrrg.setOption("--matey", true, true, nullptr);
+        arrrg.setOption("--parrot", false, false);
+        arrrg.setOption("--pegleg", true, true);
+        
+        bool success = a.parse(argc, argv, errors);
+        if(!success) { //deal with it.... }
+        
+        // the rest of your program...
+    }
+
+When myprogram is run, the --parrot flag must be present and it must be trailed with a value.  --matey and --pegleg
+are optional.  As shown, the success boolean would evaluate to true when run (--pegleg is optional).
+
+Running...
+
+    > myprogram  --matey --parrot --pegleg 
+
+would have sucess evaluate to false (--parrot is missing its value).
+
+See the unit tests for more examples.
 
 [2.0] Build Requirements
 ========================
