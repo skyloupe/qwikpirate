@@ -7,7 +7,7 @@ set(CLI_SOURCES argv.cpp)
 set(CLI_HEADERS ${CLI_INC_DIR}/argv.h)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    add_compile_options(-std=c++14 -fPIC)
+    add_compile_options(-std=c++11 -fPIC)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
