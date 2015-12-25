@@ -138,7 +138,7 @@ namespace qwikpirate
 
         std::string flagregex_;
         Arguments<std::string> arguments_;
-        std::vector<Option<std::string>> options_;
+        std::vector<Option<std::string> > options_;
     };
 
 }

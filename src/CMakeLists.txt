@@ -6,9 +6,13 @@ set(CLI_SOURCES argv.cpp)
 
 set(CLI_HEADERS ${CLI_INC_DIR}/argv.h)
 
-if(LINUX)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     add_compile_options(-std=c++14 -fPIC)
-endif(LINUX)
+endif()
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    add_compile_options(-Wc++11-extensions)
+endif()
 
 if(BUILD_SHARED_LIB)
     add_library(cli SHARED ${CLI_HEADERS} ${CLI_SOURCES})
