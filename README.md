@@ -18,7 +18,7 @@ QwikPirate - "ARRRG-vee, Matey!"
 
 A silly C++ library to parse command line parameters for your C and C++ programs*.
 
-(c)2015-2015 Geoffrey John Atkinson
+Copyright 2015 Geoffrey John Atkinson
 geoffrey_atkinso@hotmail.com (yes, this is a spam account)
 
 Ascii art by "jgs" at http://ascii.co.uk/  Nice work "jgs"!
@@ -80,13 +80,13 @@ suffice.
 ==================================
 
 > cmake -G "Visual Studio 12 Win64" <source directory>
-> cmake --build . --config [Debug|Release|DebWithRelInfo|MinRelSize]
+> cmake --build . --target install --config [Debug|Release|DebWithRelInfo|MinRelSize]
 
 [3.1] Build Instructions (Linux/OSX)
 ------------------------------------
 
-> cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug <source directory>
-> cmake --build . --config [Debug|Release|DebWithRelInfo|MinSizeRel]
+> cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=[Debug|Release|DebWithRelInfo|MinSizeRel] <source directory>
+> cmake --build . --target install
 
 Feel free to experiment with other generators, esp XCode.  Hint hint.
 
@@ -97,6 +97,8 @@ To build the cli library as a shared library define the CMake variable
 BUILD_SHARED_LIB:
 
 -DBUILD_SHARED_LIB
+
+Note that this is not quite working correctly on OS X yet.  It builds, but I need to deal with @rpath.
 
 [4.0] Unit tests
 ================
@@ -116,8 +118,4 @@ The following environment variables need to be set:
 	
 If not statically linking to the Google libraries, be sure to be able to
 resolve the GTest/GMock shared libraries when running the unit tests.
-
-
-
-
 
