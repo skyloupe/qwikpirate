@@ -1,7 +1,8 @@
 include_directories(
         ${PROJECT_SOURCE_DIR}/include 
-		$ENV{GOOGLE_MOCK_INC_DIR} 
-		$ENV{GOOGLE_TEST_INC_DIR})
+        $ENV{GOOGLE_MOCK_INC_DIR} 
+        $ENV{GOOGLE_TEST_INC_DIR}
+)
 
 link_directories($ENV{GOOGLE_MOCK_LIB_DIR} $ENV{GOOGLE_TEST_LIB_DIR}) 
 
