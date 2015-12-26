@@ -43,7 +43,7 @@ These tutorial aspects will never take precedence over the primary mission of
 being a simple command line parser with no external dependencies - aside from 
 GMock/GTest and the standard C++ library.
 
-Note that this is FOSS released under the LGPL v2.1.  See the file LICENSE
+Note that this is FOSS released under the LGPL v3.  See the file LICENSE
 for details.
 
 So here it is.
