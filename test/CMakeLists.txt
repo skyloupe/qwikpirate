@@ -17,7 +17,7 @@ endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     add_compile_options(-std=c++11)
-    set(LINK_LIBS cli gmock gtest)
+    set(LINK_LIBS cli gmock gtest pthread)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
