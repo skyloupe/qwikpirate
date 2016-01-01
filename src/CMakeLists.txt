@@ -4,7 +4,8 @@ include_directories(${CLI_INC_DIR})
 
 set(CLI_SOURCES argv.cpp)
 
-set(CLI_HEADERS ${CLI_INC_DIR}/argv.h)
+set(CLI_HEADERS ${CLI_INC_DIR}/argv.h
+                ${CLI_INC_DIR}/opts.h )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     add_compile_options(-std=c++11 -fPIC)

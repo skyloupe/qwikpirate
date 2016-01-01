@@ -24,8 +24,8 @@
 
 #include <string>
 #include <vector>
-#include <map>
-#include <list>
+
+#include "opts.h"
 
 #if defined (_WIN32) 
 #if defined (cli_EXPORTS)
@@ -41,79 +41,7 @@ typedef void(*optioncb_t)(const std::string& flag, const std::string& value, voi
 
 namespace qwikpirate
 {
-    template<typename T>
-    class Option
-    {
-        public:
-            Option<T>() = delete;
-            Option<T>(const T& name, bool optional, bool flag_only, optioncb_t callback = nullptr, 
-                      void* data = nullptr)
-                : name_( name ), optional_( optional ), flag_only_( flag_only ),
-                callback_( callback ), data_( data ){}
-            
-            T getName() const { return name_; }
-            bool getOptional() const { return optional_; }
-            bool getFlagOnly() const { return flag_only_; }
-            optioncb_t getCallback() const { return callback_; }
-            void* getData() const { return data_; }
-
-        private:
-            T name_;
-            bool optional_ = true;
-            bool flag_only_ = true;
-            optioncb_t callback_ = nullptr;
-            void* data_ = nullptr;
-    };
-
-    template<typename T>
-    class Arguments
-    {
-        public:
-            Arguments<T>() = default;
-            virtual ~Arguments<T>() = default;
-
-            bool set(const T& flag, const T& value)
-            {
-                try
-                {
-                    args_.insert(std::make_pair(flag, value));
-                }
-                catch (std::bad_alloc&)
-                {
-                    return false;
-                }
-                return true;
-            }
-
-            bool get(const T& flag, std::vector<T>& values)
-            {
-                bool found = false;
-                typename std::pair <typename std::multimap<T, T>::iterator, typename std::multimap<T, T>::iterator> ret;
-                ret = args_.equal_range(flag);
-
-                for (typename std::multimap<T, T>::iterator it = ret.first; it != ret.second; ++it)
-                {
-                    found = true;
-                    values.push_back(it->second);
-                }
-              
-                return found;
-            }
-
-            bool has(const T& flag) const
-            {
-                if (args_.end() == args_.find(flag))
-                    return false;
-                return true;
-            }
-
-            void clear() { args_.clear(); }
-
-        private:
-            std::multimap<T, T> args_;
-    };
-
-    class CLI_EXPORT ArgVee
+    class  ArgVee
     {
     public:
         ArgVee(const std::string keyregex = "--[a-zA-Z0-9_]+$") : flagregex_(keyregex) { }
@@ -140,7 +68,6 @@ namespace qwikpirate
         Arguments<std::string> arguments_;
         std::vector<Option<std::string> > options_;
     };
-
 }
 
 
