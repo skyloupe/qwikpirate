@@ -238,32 +238,25 @@ bool ArgVee::getFlag(const std::string& flag, std::vector<std::string>& values)
 
 void ArgVee::apply()
 {
-    try
+    for (auto& option : options_)
     {
-        for (auto& option : options_)
+        std::vector<std::string> values;
+        optioncb_t callback = option.getCallback();
+
+        bool getflag = getFlag(option.getName(), values);
+
+        if (false == getflag && option.getOptional())
         {
-            std::vector<std::string> values;
-            optioncb_t callback = option.getCallback();
+            continue;
+        }
 
-            bool getflag = getFlag(option.getName(), values);
-            
-            if (false == getflag && option.getOptional())
+        for (auto val : values)
+        {
+            if (nullptr != callback)
             {
-                continue;
-            }
-
-            for (auto val : values)
-            {
-                if (nullptr != callback)
-                {
-                    callback(option.getName(), val, option.getData());
-                }
+                callback(option.getName(), val, option.getData());
             }
         }
-    }
-    catch (...)
-    {
-
     }
 }
 
