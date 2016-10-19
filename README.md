@@ -23,7 +23,7 @@ geoffrey_atkinso@hotmail.com (yes, this is a spam account)
 
 Ascii art by "jgs" at http://ascii.co.uk/  Nice work "jgs"!
 
-*At some point I actually *do* plan on a C API for this.
+At some point I actually *do* plan on a C API for this.
 
 [1.0] Introduction
 ==================
@@ -93,7 +93,7 @@ Example (with code):   > myprogram  --matey --parrot Polly
         std::vector<std::string> errors;
         
         qwikpirate::ArgVee arrrg;
-        //Use: flag (match regex!!), optional?, flag only?, callback (optional - defaults to null)
+        //Use: flag, optional?, flag only?, callback (optional - defaults to null)
         arrrg.setOption("--matey", true, true, nullptr);
         arrrg.setOption("--parrot", false, false);
         arrrg.setOption("--pegleg", true, true);
