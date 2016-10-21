@@ -1,6 +1,6 @@
-cmake_minimum_required (VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.0.0)
 
-project (qwik_pirate)
+project(qwik_pirate)
 
 option(BUILD_UNIT_TESTS "Build Unit Tests" ON)
 option(BUILD_SHARED_LIB "Build Unit Tests" OFF)
