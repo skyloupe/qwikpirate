@@ -111,7 +111,7 @@ Running...
 
     > myprogram  --matey --parrot --pegleg 
 
-would have sucess evaluate to false (--parrot is missing its value).
+would have success evaluate to false (--parrot is missing its value).
 
 See the unit tests for more examples.
 
@@ -171,10 +171,10 @@ To build the unit tests define the CMake variable BUILD_UNIT_TESTS:
 
 The following environment variables need to be set:
 
-	GOOGLE_TEST_INC_DIR : location of gtest headers
-	GOOGLE_MOCK_INC_DIR : location of gmock headers
-	GOOGLE_TEST_LIB_DIR : location of gtest libraries
-	GOOGLE_MOCK_LIB_DIR : location of gmock libraries
+    GOOGLE_TEST_INC_DIR : location of gtest headers
+    GOOGLE_MOCK_INC_DIR : location of gmock headers
+    GOOGLE_TEST_LIB_DIR : location of gtest libraries
+    GOOGLE_MOCK_LIB_DIR : location of gmock libraries
 	
 If not statically linking to the Google libraries, be sure to be able to
 resolve the GTest/GMock shared libraries when running the unit tests.
