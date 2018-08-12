@@ -113,7 +113,7 @@ Running...
     
     > myprogram  --parrot Polly
 
-The following ould have success evaluate to false (--parrot is missing its value).
+The following would have success evaluate to false (--parrot is missing its value).
 
     > myprogram  --matey --parrot --pegleg
 
