@@ -98,20 +98,26 @@ Example (with code):   > myprogram  --matey --parrot Polly
         arrrg.setOption("--parrot", false, false);
         arrrg.setOption("--pegleg", true, true);
         
-        bool success = a.parse(argc, argv, errors);
+        bool success = arrrg.parse(argc, argv, errors);
         if(!success) { //deal with it.... }
         
         // the rest of your program...
     }
 
 When myprogram is run, the --parrot flag must be present and it must be trailed with a value.  --matey and --pegleg
-are optional.  As shown, the success boolean would evaluate to true when run (--pegleg is optional).
+are optional.  As shown, the success boolean would evaluate to true when run as shown below (--matey and --pegleg are optional).
 
 Running...
 
-    > myprogram  --matey --parrot --pegleg 
+    > myprogram  --matey --parrot Polly --pegleg
+    
+    > myprogram  --matey --parrot Polly
+    
+    > myprogram  --parrot Polly
 
-would have success evaluate to false (--parrot is missing its value).
+The following ould have success evaluate to false (--parrot is missing its value).
+
+    > myprogram  --matey --parrot --pegleg
 
 See the unit tests for more examples.
 
@@ -153,12 +159,12 @@ Feel free to experiment with other generators, esp XCode.  Hint hint.
 [3.2] Build Shared Libraries
 ----------------------------
 
-To build the cli library as a shared library define the CMake variable 
+To build the library as a shared library define the CMake variable 
 BUILD_SHARED_LIB:
 
 -DBUILD_SHARED_LIB
 
-Note that this is not quite working correctly on OS X yet.  It builds, but I need to deal with @rpath.
+Note that this is not quite working correctly on OS X yet.  It builds and runs, but I need to deal with @rpath.
 
 [4.0] Unit tests
 ================
