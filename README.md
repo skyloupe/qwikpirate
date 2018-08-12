@@ -84,9 +84,7 @@ above.
 The default flag regex is two dashes followed by an alphanumeric string.  Order is not enforced or preserved.
 Flag evaluation is case sensitive.
 
-Example:  > app.exe --flag1 value1 --flag2 --flag3 value3
-
-Example (with code):   > myprogram  --matey --parrot Polly
+Example (with code):   > myprogram  --matey --parrot Polly --pegleg
 
     int main(int argc, const char* argv[])
     {
