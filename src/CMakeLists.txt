@@ -35,8 +35,5 @@ else()
     add_library(cli STATIC ${CLI_HEADERS} ${CLI_SOURCES})
 endif()
 
-install(TARGETS cli DESTINATION ${INSTALL_DIR}/lib)
-
-install(FILES ${CLI_HEADERS} DESTINATION ${INSTALL_DIR}/include/cli)
 
 
