@@ -1,31 +1,38 @@
+#
+#   A silly C++ library to parse command line parameters for your C and C++ programs.
+#
+#   Copyright (C) 2015  Geoffrey Atkinson
+#   
+#   Geoffrey Atkinson <gatkinson@skyloupe.com>
+#   
+#   This library is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU Lesser General Public
+#   License as published by the Free Software Foundation; either
+#   version 3 of the License, or (at your option) any later version.
+#   
+#   This library is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#   Lesser General Public License for more details.
+#   
+#   You should have received a copy of the GNU Lesser General Public
+#   License along with this library; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+#
+
 include_directories(
         ${PROJECT_SOURCE_DIR}/include 
-        $ENV{GOOGLE_MOCK_INC_DIR} 
-        $ENV{GOOGLE_TEST_INC_DIR}
 )
-
-link_directories($ENV{GOOGLE_MOCK_LIB_DIR} $ENV{GOOGLE_TEST_LIB_DIR}) 
 
 set(UNIT_TESTS cli_test.cpp)
 
+set(LINK_LIBS cli GTest::GTest GTest::Main)
+
 add_executable(qwik_pirate_unit_test main.cpp ${UNIT_TESTS})
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    add_compile_options(-std=c++11)
-    set(LINK_LIBS cli gmock gtest)
-endif()
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    add_compile_options(-std=c++11)
-    set(LINK_LIBS cli gmock gtest pthread)
-endif()
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    add_compile_options(-Wc++11-extensions)
-    set(LINK_LIBS cli gmock gtest)
-endif()
 
 target_link_libraries(qwik_pirate_unit_test ${LINK_LIBS})
 
-install(TARGETS qwik_pirate_unit_test DESTINATION ${PROJECT_BINARY_DIR}/bin)
+gtest_discover_tests(qwik_pirate_unit_test TEST_PREFIX qwikpirate_test:)
+
+install(TARGETS qwik_pirate_unit_test DESTINATION ${CMAKE_INSTALL_DIR}/bin)
 
