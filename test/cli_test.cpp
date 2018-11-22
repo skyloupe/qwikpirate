@@ -294,36 +294,5 @@ TEST_F(CliTest, Options_FXOF_Fails)
     ASSERT_EQ(0, errors_[0].compare("Mismatch flag/value pair"));
 }
 
-/////////////////////////// TODO:  fix
-
-TEST_F(CliTest, DISABLED_Options_Short_Argv_Fails)
-{
-    const char* argv[4] = { "theapp.exe", "--one", "one", "--three" };
-    int argc = 5;
-    qwikpirate::ArgVee a;
-
-    a.setOption("--one", true, false);
-    a.setOption("--two", true, true);
-    a.setOption("--three", true, true);
-
-    bool success = a.parse(argc, argv, errors_);
-    ASSERT_FALSE(success);
-}
-
-TEST_F(CliTest, DISABLED_Options_UnknownFlag)
-{
-    // Having quite a time trying to figure out how to implement this functionality elegantly
-    const char* argv[5] = { "theapp.exe", "--one", "--nine??", "--three", "three" };
-    int argc = 5;
-    qwikpirate::ArgVee a;
-
-    a.setOption("--one", true, true);
-    a.setOption("--two", true, true);
-    a.setOption("--three", true, false);
-
-    bool success = a.parse(argc, argv, errors_);
-    ASSERT_TRUE(success);
-}
-
 
 
