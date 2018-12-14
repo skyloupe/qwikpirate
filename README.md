@@ -19,7 +19,6 @@ QwikPirate - "ARRRG-vee, Matey!"
 A silly C++ library to parse command line parameters for your C and C++ programs.
 
 Copyright 2015 Geoffrey John Atkinson
-geoffrey_atkinso@hotmail.com (yes, this is a spam account)
 
 Ascii art by "jgs" at http://ascii.co.uk/  Nice work "jgs"!
 
