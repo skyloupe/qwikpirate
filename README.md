@@ -153,16 +153,6 @@ suffice.
 
 Feel free to experiment with other generators, esp XCode.  Hint hint.
 
-[3.2] Build Shared Libraries
-----------------------------
-
-To build the library as a shared library define the CMake variable 
-BUILD_SHARED_LIB:
-
--DBUILD_SHARED_LIB
-
-Note that this is not quite working correctly on OS X yet.  It builds and runs, but I need to deal with @rpath.
-
 [4.0] Unit tests
 ================
 
