@@ -1,9 +1,7 @@
 /*
 *    A silly C++ library to parse command line parameters for your C and C++ programs.
 *
-*    Copyright (C) 2015  Geoffrey Atkinson
-*
-*    Geoffrey Atkinson <gatkinson@skyloupe.com>
+*    Copyright (C) 2015 Skyloupe LLC
 *
 *    This library is free software; you can redistribute it and/or
 *    modify it under the terms of the GNU Lesser General Public
