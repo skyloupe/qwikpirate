@@ -142,16 +142,18 @@ suffice.
 [3.0] Build Instructions (Windows)
 ==================================
 
-> cmake -G "Visual Studio 12 Win64" <source directory>
-> cmake --build . --target install --config [Debug|Release|DebWithRelInfo|MinRelSize]
+   cmake -G "Visual Studio 12 Win64" <source directory>
+   
+   cmake --build . --target install --config [Debug|Release|DebWithRelInfo|MinRelSize]
+
 
 [3.1] Build Instructions (Linux/OSX)
 ------------------------------------
 
-> cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=[Debug|Release|DebWithRelInfo|MinSizeRel] <source directory>
-> cmake --build . --target install
+   cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=[Debug|Release] <source directory>
+   
+   cmake --build . --target install
 
-Feel free to experiment with other generators, esp XCode.  Hint hint.
 
 [4.0] Unit tests
 ================
