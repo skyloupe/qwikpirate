@@ -22,7 +22,7 @@ Copyright 2015 Geoffrey John Atkinson
 
 Ascii art by "jgs" at http://ascii.co.uk/  Nice work "jgs"!
 
-At some point I actually *do* plan on a C API for this.
+At some point I actually *do* plan on a C API for this.  No, really... I am not kidding.
 
 [1.0] Introduction
 ==================
@@ -142,33 +142,27 @@ suffice.
 [3.0] Build Instructions (Windows)
 ==================================
 
-> cmake -G "Visual Studio 12 Win64" <source directory>
-> cmake --build . --target install --config [Debug|Release|DebWithRelInfo|MinRelSize]
+   cmake -G "Visual Studio 12 Win64" <source directory>
+   
+   cmake --build . --target install --config [Debug|Release|DebWithRelInfo|MinRelSize]
+
 
 [3.1] Build Instructions (Linux/OSX)
 ------------------------------------
 
-> cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=[Debug|Release|DebWithRelInfo|MinSizeRel] <source directory>
-> cmake --build . --target install
+   cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=[Debug|Release] <source directory>
+   
+   cmake --build . --target install
 
-Feel free to experiment with other generators, esp XCode.  Hint hint.
 
 [4.0] Unit tests
 ================
 
+The unit tests are built by default:
+
 QwikPirate uses Google Mock and Google Test for the unit test framework.
 
-To build the unit tests define the CMake variable BUILD_UNIT_TESTS:
+To disable building the unit tests define the CMake variable BUILD_UNIT_TESTS to OFF:
 
-    -DBUILD_UNIT_TESTS
-
-The following environment variables need to be set:
-
-    GOOGLE_TEST_INC_DIR : location of gtest headers
-    GOOGLE_MOCK_INC_DIR : location of gmock headers
-    GOOGLE_TEST_LIB_DIR : location of gtest libraries
-    GOOGLE_MOCK_LIB_DIR : location of gmock libraries
-	
-If not statically linking to the Google libraries, be sure to be able to
-resolve the GTest/GMock shared libraries when running the unit tests.
+    -DBUILD_UNIT_TESTS=OFF
 
