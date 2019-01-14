@@ -103,7 +103,7 @@ bool ArgVee::parse(int argc, const char* argv[], std::vector<std::string>& error
         if (true == this->isFlag(argi))
         {
             // Strip the leading dashes
-            std::string flag = argi;//.substr(2);
+            std::string flag = argi;
             std::string value;
 
             // End case flag with no options, so give it an empty value
@@ -140,7 +140,7 @@ bool ArgVee::verify(std::vector<std::string>& errors)
 {
     bool valid = true;
 
-    //figure out how to verify regex syntax
+    //TODO: verify regex syntax
 
     //verify options
     for (auto& option : options_)
