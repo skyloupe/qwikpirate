@@ -75,6 +75,10 @@ TEST_F(CliTest, Options_FFF)
     ASSERT_TRUE(success);
 }
 
+//
+// TODO 1/14/19 - Now that the application that needed this is dead, rethink the curious design decision
+// to silently succeed with unknown flags,
+//
 TEST_F(CliTest, Options_F2XF)
 {
     const char* argv[4] = { "theapp.exe", "--one", "--onr", "--three" };
@@ -291,6 +295,3 @@ TEST_F(CliTest, Options_FXOF_Fails)
 
     ASSERT_EQ(0, errors_[0].compare("Mismatch flag/value pair"));
 }
-
-
-
