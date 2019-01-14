@@ -186,6 +186,28 @@ TEST_F(CliTest, Options_SingleDashRegex_FVXF_NULL_Callback)
 
 ////////////// Failure conditions
 
+TEST_F(CliTest, NULL_Argv)
+{
+    const char** argv = nullptr;
+    int argc = 1;
+    qwikpirate::ArgVee a;
+    std::vector<std::string> errors;
+
+    bool success = a.parse(argc, argv, errors_);
+    ASSERT_FALSE(success);
+}
+
+TEST_F(CliTest, Zero_Argv)
+{
+    const char* argv[1] = { "theapp.exe" };
+    int argc = 0;
+    qwikpirate::ArgVee a;
+    std::vector<std::string> errors;
+
+    bool success = a.parse(argc, argv, errors_);
+    ASSERT_FALSE(success);
+}
+
 TEST_F(CliTest, Malformed_Flag_Fails)
 {
     //                                    *malformed
