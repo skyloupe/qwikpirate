@@ -20,7 +20,7 @@
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-cmake_minimum_required(VERSION 3.6.0)
+cmake_minimum_required(VERSION 3.28.0)
 
 project(qwik_pirate)
 
@@ -28,11 +28,11 @@ option(BUILD_UNIT_TESTS "Build Unit Tests" ON)
 option(BUILD_SHARED_LIB "Build Shared Library" OFF)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    add_compile_options(-fPIC -std=c++11)
+    add_compile_options(-fPIC -std=c++14)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    add_compile_options(-Wc++11-extensions)
+    add_compile_options(-Wc++14-extensions)
 endif()
 
 if(MSVC)
