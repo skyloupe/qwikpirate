@@ -28,7 +28,7 @@ option(BUILD_UNIT_TESTS "Build Unit Tests" ON)
 option(BUILD_SHARED_LIB "Build Shared Library" OFF)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    add_compile_options(-fPIC -std=c++14)
+    add_compile_options(-fPIC -std=c++17)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
