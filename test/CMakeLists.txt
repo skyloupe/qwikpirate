@@ -32,5 +32,3 @@ target_link_libraries(qwik_pirate_unit_test ${LINK_LIBS})
 
 gtest_discover_tests(qwik_pirate_unit_test TEST_PREFIX qwikpirate_test:)
 
-install(TARGETS qwik_pirate_unit_test DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-
